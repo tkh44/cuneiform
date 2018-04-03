@@ -41,7 +41,6 @@ describe("cuneiform", () => {
     }
 
     let runCount = 0;
-    let resetFormUp
 
     class Tester extends React.Component {
       state = {
