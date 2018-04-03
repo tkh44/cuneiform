@@ -1,0 +1,124 @@
+{
+  "name": "cuneiform",
+  "version": "0.0.1",
+  "description": "Simple Declarative Form Library",
+  "main": "index.js",
+  "scripts": {
+    "build": "microbundle",
+    "dev": "microbundle watch",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tkh44/cuneiform.git"
+  },
+  "keywords": [
+    "form",
+    "react",
+    "react-form",
+    "react",
+    "component"
+  ],
+  "author": "Kye Hohenberger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tkh44/cuneiform/issues"
+  },
+  "homepage": "https://github.com/tkh44/cuneiform#readme",
+  "dependencies": {
+    "lodash.isequal": "^4.5.0",
+    "recompose": "^0.26.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.2",
+    "babel-jest": "^19.0.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "enzyme": "^3.1.1",
+    "enzyme-adapter-react-16": "^1.0.4",
+    "enzyme-to-json": "^3.2.1",
+    "eslint": "^4.5.0",
+    "eslint-config-prettier": "^2.3.0",
+    "eslint-config-react": "^1.1.7",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-config-standard-react": "^5.0.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-prettier": "^2.2.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^7.3.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "jest": "^21.2.1",
+    "jest-cli": "^20.0.4",
+    "jest-in-case": "^1.0.2",
+    "jest-serializer-html": "^4.0.1",
+    "microbundle": "^0.4.4",
+    "prettier": "1.10.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-test-renderer": "^16.2.0"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "modules": false,
+          "loose": true
+        }
+      ],
+      "stage-0",
+      "react"
+    ],
+    "env": {
+      "test": {
+        "presets": [
+          [
+            "env",
+            {
+              "loose": true
+            }
+          ],
+          "stage-0",
+          "react"
+        ]
+      }
+    }
+  },
+  "eslintConfig": {
+    "extends": [
+      "standard",
+      "standard-react",
+      "prettier",
+      "prettier/react"
+    ],
+    "plugins": [
+      "prettier"
+    ],
+    "parser": "babel-eslint",
+    "rules": {
+      "prettier/prettier": "error",
+      "react/prop-types": 0,
+      "react/no-unused-prop-types": 0,
+      "standard/computed-property-even-spacing": 0,
+      "no-template-curly-in-string": 0,
+      "camelcase": 0
+    },
+    "env": {
+      "browser": true
+    },
+    "overrides": [
+      {
+        "files": [
+          "*.test.js"
+        ],
+        "env": {
+          "jest": true
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`cuneiform demo 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <input
+    name="name"
+    onChange={[Function]}
+    type="text"
+    value={undefined}
+  />
+  <button
+    onClick={[Function]}
+  >
+    Reset
+  </button>
+  <button
+    type="submit"
+  >
+    Submit
+  </button>
+</form>
+`;
