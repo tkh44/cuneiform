@@ -1,8 +1,21 @@
 import React from "react";
-import isEqual from "lodash.isequal";
+import deepEqual from "fast-deep-equal";
+import omit from "object.omit";
 import compose from "recompose/compose";
 import withState from "recompose/withState";
 import withHandlers from "recompose/withHandlers";
+
+const payloadKeys = [
+  "children",
+  "getValue",
+  "setValue",
+  "isPristine",
+  "isDirty",
+  "onSubmit",
+  "formValues",
+  "resetForm",
+  "updateValues"
+];
 
 export default compose(
   withState(
@@ -15,10 +28,10 @@ export default compose(
       return () => updateValues(initialValues);
     },
     isPristine: ({ formValues, initialValues, updateValues }) => {
-      return isEqual(formValues, initialValues);
+      return deepEqual(formValues, initialValues);
     },
     isDirty: ({ formValues, initialValues, updateValues }) => {
-      return () => !isEqual(formValues, initialValues);
+      return () => !deepEqual(formValues, initialValues);
     },
     getValue: ({ formValues }) => {
       return name => formValues[name];
@@ -26,7 +39,7 @@ export default compose(
     setValue: ({ formValues, updateValues }) => {
       return e => {
         const { name, value } = e.target;
-        updateValues({ ...formValues, ...{ [name]: value } });
+        updateValues(Object.assign(formValues, { [name]: value }));
       };
     },
     onSubmit: props => {
@@ -37,30 +50,22 @@ export default compose(
     }
   })
 )(props => {
-  const {
-    children,
-    getValue,
-    setValue,
-    isPristine,
-    isDirty,
-    onSubmit,
-    formValues,
-    resetForm,
-    updateValues,
-    ...rest
-  } = props;
+  const rest = omit(props, payloadKeys);
 
-  return (
-    <form {...rest} onSubmit={onSubmit}>
-      {children({
-        isPristine,
-        isDirty,
-        formValues,
-        getValue,
-        setValue,
-        resetForm,
-        updateValues
-      })}
-    </form>
+  return React.createElement(
+    "form",
+    Object.assign({}, rest, {
+      onSubmit: props.onSubmit,
+      children: props.children({
+        isPristine: props.isPristine,
+        isDirty: props.isDirty,
+        formValues: props.formValues,
+        getValue: props.getValue,
+        setValue: props.setValue,
+        resetForm: props.resetForm,
+        onSubmit: props.onSubmit,
+        updateValues: props.updateValues
+      })
+    })
   );
 });

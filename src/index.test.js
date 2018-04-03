@@ -41,6 +41,7 @@ describe("cuneiform", () => {
     }
 
     let runCount = 0;
+    let resetFormUp
 
     class Tester extends React.Component {
       state = {
@@ -54,9 +55,12 @@ describe("cuneiform", () => {
       render() {
         return (
           <Form onSubmit={onSubmit}>
-            {({ getValue, setValue, resetForm }) => {
+            {({ getValue, setValue }) => {
               runCount++;
-              console.log(runCount);
+              function getValueAndThrow() {
+                getValue("name");
+              }
+
               switch (runCount) {
                 case 1:
                   expect(getValue("name")).toBe(undefined);
@@ -68,15 +72,11 @@ describe("cuneiform", () => {
                   break;
                 case 3:
                   expect(getValue("name")).toBe("Sam");
-                  resetForm();
                   break;
                 case 4:
-                  console.log('4')
-                  expect(getValue("name")).toBe(undefined);
-                  break;
-                case 5:
-                  console.log('5')
-                  expect(getValue("name")).toBe(undefined);
+                  try {
+                    expect(getValueAndThrow).toThrowErrorMatchingSnapshot();
+                  } catch (e) {}
                   break;
                 default:
                   break;
@@ -89,7 +89,6 @@ describe("cuneiform", () => {
                     value={getValue("name")}
                     onChange={setValue}
                   />
-                  <button onClick={resetForm}>Reset</button>
                   <button type="submit">Submit</button>
                 </React.Fragment>
               );
@@ -99,14 +98,6 @@ describe("cuneiform", () => {
       }
     }
 
-    let instance;
-
-    function getRef(node) {
-      instance = node;
-    }
-
-    TestUtils.renderIntoDocument(<Tester ref={getRef} />);
-    // instance.setState({ updateFlag: instance.state.updateFlag++ })
-    // instance.setState({ updateFlag: instance.state.updateFlag++ })
+    TestUtils.renderIntoDocument(<Tester />);
   });
 });

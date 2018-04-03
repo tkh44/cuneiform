@@ -2,7 +2,10 @@
   "name": "cuneiform",
   "version": "0.0.1",
   "description": "Simple Declarative Form Library",
-  "main": "index.js",
+  "main": "dist/cuneiform.js",
+  "umd:main": "dist/cuneiform.umd.js",
+  "module": "dist/cuneiform.m.js",
+  "source": "src/index.js",
   "scripts": {
     "build": "microbundle",
     "dev": "microbundle watch",
@@ -12,6 +15,10 @@
     "type": "git",
     "url": "git+https://github.com/tkh44/cuneiform.git"
   },
+  "files": [
+    "src",
+    "dist"
+  ],
   "keywords": [
     "form",
     "react",
@@ -26,7 +33,11 @@
   },
   "homepage": "https://github.com/tkh44/cuneiform#readme",
   "dependencies": {
+    "fast-deep-equal": "^1.1.0",
+    "lodash": "^4.17.5",
     "lodash.isequal": "^4.5.0",
+    "lodash.omit": "^4.5.0",
+    "object.omit": "^3.0.0",
     "recompose": "^0.26.0"
   },
   "devDependencies": {
